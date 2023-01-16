@@ -138,7 +138,7 @@ CACHES = {
         "KEY_PREFIX": "example"
     }
 }
-CACHE_TTL = 60 * 1  # Cache time to live is 1 minutes.
+CACHE_TTL = 60 * 120  # Cache time to live is 1 minutes.
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379

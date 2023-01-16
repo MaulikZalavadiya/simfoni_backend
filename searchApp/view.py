@@ -57,7 +57,7 @@ class ListRepo(APIView):
                 tmp_dict['stargazers_count'] = i['stargazers_count']
                 tmp_dict['full_name'] = i['full_name']
                 tmp_ls.append(tmp_dict)
-            # print(tmp_ls)
+            print(tmp_ls)
             print("from data")
             redis_instance.set(j_st, json.dumps(tmp_ls))
             return Response(data=tmp_ls)
