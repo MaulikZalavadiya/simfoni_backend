@@ -45,7 +45,7 @@ class ListRepo(APIView):
         except:
             pass
         if type=='repositories':
-            headers = {'Authorization':'Bearer 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','Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'}
+            headers = {'Authorization':'Bearer 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','Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'}
             resp = requests.get(f'https://api.github.com/search/repositories?q={search}&page={page}', headers=headers)
             resp = json.loads(resp.text)
             tmp_ls= []
@@ -54,13 +54,15 @@ class ListRepo(APIView):
                 tmp_dict['username'] = i['owner']['login']
                 tmp_dict['profile'] = i['owner']['avatar_url']
                 tmp_dict['repo_url'] = i['owner']['url']
+                tmp_dict['stargazers_count'] = i['stargazers_count']
+                tmp_dict['full_name'] = i['full_name']
                 tmp_ls.append(tmp_dict)
-            print(tmp_ls)
+            # print(tmp_ls)
             print("from data")
             redis_instance.set(j_st, json.dumps(tmp_ls))
             return Response(data=tmp_ls)
         elif type=='user':
-            headers = {'Authorization':'Bearer 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','Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'}
+            headers = {'Authorization':'Bearer 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','Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'}
             resp = requests.get(f'https://api.github.com/search/users?q={search}&page={page}', headers=headers)
             resp = json.loads(resp.text)
             tmp_ls= []
@@ -73,7 +75,7 @@ class ListRepo(APIView):
             redis_instance.set(j_st, json.dumps(tmp_ls))
             return Response(data=tmp_ls)
         elif type =='issues':
-            headers = {'Authorization':'Bearer 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','Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'}
+            headers = {'Authorization':'Bearer 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','Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'}
             resp = requests.get(f'https://api.github.com/search/issues?q={search}&page={page}', headers=headers)
             resp = json.loads(resp.text)
             tmp_ls= []
